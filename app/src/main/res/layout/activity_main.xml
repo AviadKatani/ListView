@@ -51,7 +51,7 @@
         android:layout_height="wrap_content" >
 
         <TextView
-        android:text="X1 = "
+        android:text="x1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView3"
@@ -63,7 +63,7 @@
             android:inputType="numberDecimal"
             android:ems="10"
             android:id="@+id/editText2"
-            android:layout_weight="1"
+            android:layout_weight="0.93"
             android:textSize="14sp"
             android:text="Enter x1 here" />
     </LinearLayout>
@@ -89,16 +89,16 @@
             android:textSize="14sp"
             android:text="Enter d here" />
 
-        <Button
-            android:text="Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/button"
-            android:layout_weight="1" />
     </LinearLayout>
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="150dp" />
+
     <Button
-        android:layout_width="60dp"
-        android:layout_height="40dp"
-        android:layout_weight="1"/>
+        android:text="Calculate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button" />
+
 </LinearLayout>
