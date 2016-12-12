@@ -29,19 +29,24 @@
 
     <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:id="@+id/radioGroup"
+        android:onClick="radioClicked">
 
         <RadioButton
             android:text="Arithmetic progression"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/radioButton2"
+            android:id="@+id/btnRArith"
+            android:onClick="radioClicked"
+            android:checked="true"
             android:layout_weight="1" />
 
         <RadioButton
             android:text="Geometric progression"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="radioClicked"
             android:id="@+id/radioButton"
             android:layout_weight="1" />
     </RadioGroup>
@@ -62,10 +67,10 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
-            android:id="@+id/editText2"
+            android:id="@+id/etX"
             android:layout_weight="0.93"
             android:textSize="14sp"
-            android:text="Enter x1 here" />
+            android:hint="Enter x1 here" />
     </LinearLayout>
 
     <LinearLayout
@@ -73,10 +78,10 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="d = "
+            android:text="d"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView1"
+            android:id="@+id/promoteTV"
             android:layout_weight="1" />
 
         <EditText
@@ -84,10 +89,10 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
-            android:id="@+id/editText1"
-            android:layout_weight="1"
+            android:id="@+id/etD"
+            android:layout_weight="0.88"
             android:textSize="14sp"
-            android:text="Enter d here" />
+            android:hint="Enter d here" />
 
     </LinearLayout>
 
@@ -99,6 +104,7 @@
         android:text="Calculate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button" />
+        android:id="@+id/button"
+        android:onClick="calculateClicked"/>
 
 </LinearLayout>
