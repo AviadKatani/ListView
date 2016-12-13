@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     TextView etText;
     EditText etD, etX;
     Intent solution;
-    double x1, promoter;
+    double x1, d;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void calculateClicked(View view) {
-        promoter = Double.parseDouble(etD.getText().toString());
+        d = Double.parseDouble(etD.getText().toString());
         x1 = Double.parseDouble(etX.getText().toString());
-        solution.putExtra("promoter", promoter);
+        solution.putExtra("d", d);
         solution.putExtra("x1", x1);
         startActivity(solution);
     }
