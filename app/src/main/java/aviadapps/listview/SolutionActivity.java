@@ -11,10 +11,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class SolutionActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
-    TextView x1TV, dTV, nTV, SnTV;
+    TextView x1TV, promoteTV, nTV, SnTV;
     ListView listView;
     double x1Num, dNum, nNum, SnNum, qNum;
-    double[] Numbers;
     String[] ShowNumbers;
     TextView promoterTV;
     Intent getIntent;
@@ -25,23 +24,27 @@ public class SolutionActivity extends AppCompatActivity implements AdapterView.O
         setContentView(R.layout.activity_solution);
 
         x1TV = (TextView) findViewById(R.id.x1TV);
-        dTV = (TextView) findViewById(R.id.dTV);
+        promoteTV = (TextView) findViewById(R.id.promoteTV);
         nTV = (TextView) findViewById(R.id.nTV);
         SnTV = (TextView) findViewById(R.id.SnTV);
         promoterTV = (TextView) findViewById(R.id.promoterTV);
         listView = (ListView) findViewById(R.id.listView);
         listView.setOnItemClickListener(this);
-        Numbers = new double[20];
         ShowNumbers = new String[20];
         getIntent = getIntent();
         x1Num = getIntent.getDoubleExtra("x1", 0);
+        System.out.println(String.valueOf(x1Num));
+        nTV.setText(0.0 + "");
+        SnTV.setText(0.0 + "");
         if(getIntent.getFlags() == 1) {
             dNum = getIntent.getDoubleExtra("d", 0);
-            dTV.setText(String.valueOf(dNum));
+            promoterTV.setText("d = ");
+            promoteTV.setText(String.valueOf(dNum));
         }
         else {
+            qNum = getIntent.getDoubleExtra("d", 0);
             promoterTV.setText("q = ");
-            qNum = getIntent.getDoubleExtra("q", 0);
+            promoteTV.setText(String.valueOf(qNum));
         }
         x1TV.setText(String.valueOf(x1Num));
         if(getIntent.getFlags() == 1) {
@@ -52,9 +55,12 @@ public class SolutionActivity extends AppCompatActivity implements AdapterView.O
             listView.setAdapter(adapter);
         }
         else {
-            //Geo
-            for(int i = 0; i < 20; i ++) {
-                ShowNumbers[i] = String.valueOf(x1Num * (Math.pow(qNum, i)));
+            ShowNumbers[0] = String.valueOf(x1Num);
+            System.out.println(ShowNumbers[0]);
+            for(int i = 1; i < 20; i ++) {
+                double result = Double.parseDouble(ShowNumbers[i - 1]) * qNum;
+                ShowNumbers[i] = String.valueOf(result);
+                System.out.println(result + "   and    " + ShowNumbers[i]);
             }
             ArrayAdapter <String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, ShowNumbers);
             listView.setAdapter(adapter);
@@ -70,7 +76,8 @@ public class SolutionActivity extends AppCompatActivity implements AdapterView.O
             SnTV.setText(String.valueOf(SnNum));
         }
         else {
-            SnNum = (x1Num * (Math.pow(qNum, nNum - 1)));
+            SnNum = (x1Num * ((Math.pow(qNum, nNum) - 1))) / (qNum - 1);
+            SnTV.setText(String.valueOf(SnNum));
         }
     }
 }

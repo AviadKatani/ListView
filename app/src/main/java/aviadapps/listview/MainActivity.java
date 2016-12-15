@@ -40,10 +40,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void calculateClicked(View view) {
-        d = Double.parseDouble(etD.getText().toString());
-        x1 = Double.parseDouble(etX.getText().toString());
-        solution.putExtra("d", d);
-        solution.putExtra("x1", x1);
-        startActivity(solution);
+        if(!isEmpty(etD) && !isEmpty(etX)) {
+            d = Double.parseDouble(etD.getText().toString());
+            x1 = Double.parseDouble(etX.getText().toString());
+            solution.putExtra("d", d);
+            solution.putExtra("x1", x1);
+            startActivity(solution);
+        }
+        else {
+            Toast.makeText(this, "Please enter all credentials", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private boolean isEmpty(EditText etText) {
+        String check = etText.getText().toString();
+        return check.trim().length() == 0 && check.equals(".");
     }
 }
