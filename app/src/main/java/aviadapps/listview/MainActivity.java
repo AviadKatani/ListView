@@ -54,6 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean isEmpty(EditText etText) {
         String check = etText.getText().toString();
-        return check.trim().length() == 0 && check.equals(".");
+        return check.length() == 0 || check.equals(".") || check.equals("-") || check.equals("-.");
     }
 }

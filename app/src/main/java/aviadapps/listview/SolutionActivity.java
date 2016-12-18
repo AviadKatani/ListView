@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 public class SolutionActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     TextView x1TV, promoteTV, nTV, SnTV;
@@ -49,18 +51,19 @@ public class SolutionActivity extends AppCompatActivity implements AdapterView.O
         x1TV.setText(String.valueOf(x1Num));
         if(getIntent.getFlags() == 1) {
             for(int i = 0; i < 20; i++) {
-                ShowNumbers[i] = String.valueOf(x1Num + (i * dNum));
+                ShowNumbers[i] = String.valueOf((x1Num + (i * dNum)));
             }
             ArrayAdapter <String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, ShowNumbers);
             listView.setAdapter(adapter);
         }
         else {
+            DecimalFormat df = new DecimalFormat("#0.####");
+            df.setRoundingMode(RoundingMode.CEILING);
             ShowNumbers[0] = String.valueOf(x1Num);
-            System.out.println(ShowNumbers[0]);
             for(int i = 1; i < 20; i ++) {
                 double result = Double.parseDouble(ShowNumbers[i - 1]) * qNum;
-                ShowNumbers[i] = String.valueOf(result);
-                System.out.println(result + "   and    " + ShowNumbers[i]);
+                System.out.println(result + " --- " + df.format(result));
+                ShowNumbers[i] = df.format(result);
             }
             ArrayAdapter <String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, ShowNumbers);
             listView.setAdapter(adapter);
