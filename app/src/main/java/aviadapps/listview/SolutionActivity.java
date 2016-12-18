@@ -35,7 +35,6 @@ public class SolutionActivity extends AppCompatActivity implements AdapterView.O
         ShowNumbers = new String[20];
         getIntent = getIntent();
         x1Num = getIntent.getDoubleExtra("x1", 0);
-        System.out.println(String.valueOf(x1Num));
         nTV.setText(0.0 + "");
         SnTV.setText(0.0 + "");
         if(getIntent.getFlags() == 1) {
@@ -51,19 +50,15 @@ public class SolutionActivity extends AppCompatActivity implements AdapterView.O
         x1TV.setText(String.valueOf(x1Num));
         if(getIntent.getFlags() == 1) {
             for(int i = 0; i < 20; i++) {
-                ShowNumbers[i] = String.valueOf((x1Num + (i * dNum)));
+                ShowNumbers[i] = String.valueOf((Math.ceil(x1Num + (i * dNum)) * 1000) / 1000);
             }
             ArrayAdapter <String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, ShowNumbers);
             listView.setAdapter(adapter);
         }
         else {
-            DecimalFormat df = new DecimalFormat("#0.####");
-            df.setRoundingMode(RoundingMode.CEILING);
             ShowNumbers[0] = String.valueOf(x1Num);
             for(int i = 1; i < 20; i ++) {
-                double result = Double.parseDouble(ShowNumbers[i - 1]) * qNum;
-                System.out.println(result + " --- " + df.format(result));
-                ShowNumbers[i] = df.format(result);
+                ShowNumbers[i] = String.valueOf(Math.ceil((Double.parseDouble(ShowNumbers[i - 1]) * qNum) * 1000) / 1000);
             }
             ArrayAdapter <String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, ShowNumbers);
             listView.setAdapter(adapter);
@@ -75,12 +70,14 @@ public class SolutionActivity extends AppCompatActivity implements AdapterView.O
         nNum = position + 1;
         nTV.setText(String.valueOf(nNum));
         if(getIntent.getFlags() == 1) {
-            SnNum = (nNum * (x1Num + Double.parseDouble(ShowNumbers[position]))) / 2;
+            SnNum = nNum * (x1Num + Double.parseDouble(ShowNumbers[position])) / 2;
+            SnNum = Math.ceil(SnNum * 1000) / 1000;
             SnTV.setText(String.valueOf(SnNum));
         }
         else {
-            SnNum = (x1Num * ((Math.pow(qNum, nNum) - 1))) / (qNum - 1);
-            SnTV.setText(String.valueOf(SnNum));
+            SnNum = (x1Num * (Math.pow(qNum, nNum) - 1)) / (qNum - 1);
+            SnNum = Math.ceil(SnNum * 1000) / 1000;
+            SnTV.setText(SnNum + "");
         }
     }
 }
